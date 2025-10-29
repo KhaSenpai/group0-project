@@ -2,7 +2,8 @@ import axios from 'axios';
 
 // Đặt base URL cho tất cả các request
 const api = axios.create({
-  baseURL: 'http://localhost:5000', // Cổng backend của bạn
+  // SỬA DÒNG NÀY
+  baseURL: process.env.REACT_APP_API_URL, 
 });
 
 /* Request Interceptor:
