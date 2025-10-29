@@ -36,7 +36,7 @@ app.use('/', authRoutes); // Routes cho /signup, /login, /forgot-password...
 app.use('/', userRoutes); // Routes cho /profile, /users, /upload-avatar...
 
 // Xử lý lỗi (Cơ bản)
-app.use((err, req, res) => {
+app.use((err, req, res, next) => {
   console.error('Error:', err);
   res.status(err.status || 500).json({
     message: err.message || 'Something broke!'
