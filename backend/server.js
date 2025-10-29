@@ -1,20 +1,48 @@
+require('dotenv').config();
 const express = require('express');
-const dotenv = require('dotenv');
 const mongoose = require('mongoose');
-const userRoutes = require('./routes/user');
+const cors = require('cors');
 
-dotenv.config();
+// Import config
+const config = require('./config/config');
+
+// Import routes
+const authRoutes = require('./routes/authRoutes');
+const userRoutes = require('./routes/userRoutes');
+
 const app = express();
 
-app.use(express.json());
+// ===== CONFIGURATION =====
+const { PORT, MONGO_URI, JWT_SECRET, EMAIL_USER, EMAIL_PASS, CLOUDINARY_CLOUD_NAME, CLOUDINARY_API_KEY, CLOUDINARY_API_SECRET } = config;
 
-// Kết nối MongoDB
-mongoose.connect(process.env.MONGODB_URI, { useNewUrlParser: true, useUnifiedTopology: true })
-  .then(() => console.log('Connected to MongoDB'))
-  .catch(err => console.error('MongoDB connection error:', err));
+// Make config available globally
+global.config = config;
+
+// Kết nối MongoDB Atlas
+mongoose.connect(MONGO_URI, {
+  useNewUrlParser: true,
+  useUnifiedTopology: true,
+})
+.then(() => console.log('MongoDB connected successfully'))
+.catch(err => console.error('MongoDB connection error:', err));
+
+// Middlewares
+app.use(cors()); // Cho phép cross-origin
+app.use(express.json()); // Parse JSON body
+app.use(express.urlencoded({ limit: '50mb', extended: true })); // Parse form-data
 
 // Routes
-app.use('/api', userRoutes);
+app.use('/', authRoutes); // Routes cho /signup, /login, /forgot-password...
+app.use('/', userRoutes); // Routes cho /profile, /users, /upload-avatar...
 
-const PORT = process.env.PORT || 3000;
-app.listen(PORT, () => console.log(`Server running on port ${PORT}`));
+// Xử lý lỗi (Cơ bản)
+app.use((err, req, res) => {
+  console.error('Error:', err);
+  res.status(err.status || 500).json({
+    message: err.message || 'Something broke!'
+  });
+});
+
+app.listen(PORT, () => {
+  console.log(`Server is running on port ${PORT}`);
+});
