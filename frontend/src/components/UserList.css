@@ -1,0 +1,107 @@
+.user-list {
+  margin-top: 30px;
+}
+
+.user-list h3 {
+  color: #667eea;
+  margin-bottom: 20px;
+  font-size: 1.5em;
+  text-align: center;
+}
+
+.user-list table {
+  width: 100%;
+  border-collapse: collapse;
+  box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+  border-radius: 8px;
+  overflow: hidden;
+}
+
+.user-list thead {
+  background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+  color: white;
+}
+
+.user-list th {
+  padding: 15px;
+  text-align: left;
+  font-weight: 600;
+  font-size: 0.95em;
+  letter-spacing: 0.5px;
+}
+
+.user-list td {
+  padding: 15px;
+  border-bottom: 1px solid #eee;
+  color: #555;
+  font-size: 0.95em;
+}
+
+.user-list tbody tr {
+  transition: all 0.3s ease;
+}
+
+.user-list tbody tr:hover {
+  background-color: #f8f9fa;
+  transform: scale(1.01);
+}
+
+.user-list tbody tr:last-child td {
+  border-bottom: none;
+}
+
+.user-list .btn-edit,
+.user-list .btn-delete {
+  padding: 8px 16px;
+  border: none;
+  border-radius: 6px;
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 0.85em;
+  transition: all 0.3s ease;
+  margin-right: 5px;
+  box-shadow: 0 2px 8px rgba(0, 0, 0, 0.1);
+}
+
+.user-list .btn-edit {
+  background: linear-gradient(135deg, #ffc107 0%, #ffb300 100%);
+  color: #333;
+}
+
+.user-list .btn-edit:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(255, 193, 7, 0.3);
+}
+
+.user-list .btn-delete {
+  background: linear-gradient(135deg, #dc3545 0%, #c82333 100%);
+  color: white;
+}
+
+.user-list .btn-delete:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(220, 53, 69, 0.3);
+}
+
+.empty-state {
+  text-align: center;
+  padding: 40px;
+  color: #999;
+  font-size: 1.1em;
+}
+
+@media (max-width: 768px) {
+  .user-list th,
+  .user-list td {
+    padding: 10px;
+    font-size: 0.9em;
+  }
+
+  .user-list .btn-edit,
+  .user-list .btn-delete {
+    padding: 6px 12px;
+    font-size: 0.8em;
+    margin-right: 3px;
+  }
+}
+
